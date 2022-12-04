@@ -7,23 +7,21 @@ let makeNode = function(xvalue, yvalue) {
 
     return {xvalue, yvalue, label, icon, connections}
 
-
 }
 
 const Grid = function(xmax, ymax) {
 
     let NodeArray = [];
 
-    for (let numberx = 0; numberx < xmax; numberx++) {
+    for (let numbery = 0; numbery < ymax; numbery++) {
 
-        for (let numbery = 0; numbery < ymax; numbery++) {
+        for (let numberx = 0; numberx < xmax; numberx++) {
 
             newNode = makeNode(numberx, numbery);            
             NodeArray.push(newNode);
         }
 
     }
-
 
     for (let i = 0; i < NodeArray.length; i++) {
 
@@ -41,8 +39,9 @@ const Grid = function(xmax, ymax) {
 
     return NodeArray;
 
-
 };
+
+
 
 
 //nodearray filter must be done AFTER all nodes are generated
