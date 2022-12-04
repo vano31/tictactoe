@@ -20,7 +20,6 @@ const Grid = function(xmax, ymax) {
 
             newNode = makeNode(numberx, numbery);            
             NodeArray.push(newNode);
-
         }
 
     }
@@ -29,18 +28,14 @@ const Grid = function(xmax, ymax) {
     for (let i = 0; i < NodeArray.length; i++) {
 
         let currentNode = NodeArray[i];
-        //console.log(currentNode);
         
         let cxvalue = currentNode.xvalue;
-        //console.log(currentNode.xvalue);
 
         let cyvalue = currentNode.yvalue;
-        //console.log(currentNode.yvalue);
-
         
         let connectionNodes = NodeArray.filter(node => (node.label.toString() !== currentNode.label.toString()) &&  (node.label.toString() === [cxvalue, cyvalue + 1].toString() || node.label.toString() === [cxvalue, cyvalue - 1].toString() || node.label.toString() === [cxvalue + 1, cyvalue].toString() || node.label.toString() === [cxvalue - 1, cyvalue].toString() || node.label.toString() === [cxvalue + 1, cyvalue + 1].toString() || node.label.toString() === [cxvalue - 1, cyvalue - 1].toString() || node.label.toString() === [cxvalue - 1, cyvalue + 1].toString() || node.label.toString() === [cxvalue + 1, cyvalue - 1].toString()));
-        console.log(connectionNodes);
-        currentNode[connections] = connectionNodes;
+        
+        currentNode['connections'] = connectionNodes;
 
     }
 
