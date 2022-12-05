@@ -27,3 +27,23 @@ body, html {
     border-color: black;
 
 }
+
+.filled-x {
+    background: url('x-symbol.svg'); 
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+    
+}
+
+
+.filled-o {
+    
+    background: url('o-symbol.svg');
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+    
+    
+
+}
