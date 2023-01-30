@@ -7,7 +7,7 @@ body, html {
 }
 
 
-.gridcontainer {
+.board {
     
     display: grid;
     border-style: solid;
@@ -21,7 +21,7 @@ body, html {
 
 
 
-.gridunit {
+.tile {
 
     border-style: solid;
     border-color: black;
@@ -43,7 +43,11 @@ body, html {
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: center;
-    
-    
+
+}
+
+.unfilled {
+
+    background: white;
 
 }
