@@ -45,34 +45,48 @@ const Grid = function(xmax, ymax) {
 
 let bbtiles = document.querySelectorAll(`.tile`);
 
+//Create a function called symbolChooser that allows you to decide which symnbol you want to use upon refresh
+
+
+const symbolChooser = function() {
+    let comp1;
+    let user1 = prompt(`Type x or o to be either X or O in Tic Tac Toe!`);
+    if (user1 !== `x` && user1 !== `o` && user1 !== `X` && user1 !== `o`) {
+        alert(`Sorry, that was an incorrect choice. Please refresh the page and try again.`);
+    }   else {
+        if (user1 === `x` || user1 === `X`) {
+            comp1 = `o`
+        }   else if (user1 === `o` || user1 === `O`) {
+            comp1 = `x`
+        }
+        return {user1, comp1};
+    }
+}
+
+//Create a function called turnSwitcher that assigns the cpu to a symbol that you are not using and switches between you and the cpu
+
 const tictactoe = function() {
+    //Use the symbolChooser function here
+    let {user1, comp1} = symbolChooser();
 
     let board = Grid(3,3);
     let boardtiles = document.querySelectorAll('.tile');
+
 
     boardtiles.forEach(tile => {
         tile.addEventListener(`click`, function(e) {
             let t = e.target;
             if (t.classList.contains('unfilled')) {
                 console.log(t);
-                t.className = `tile filled-x`;
+                if (user1 === `x` || user1 === 'X') {
+                    t.className = `tile filled-x`;
+                }   else if (user1 === `o` || user1 === 'O') {
+                    t.className = `tile filled-o`
+                }
+                //t.className = `tile filled-x`;
             }
         })
     })
-
-    /*
-
-    boardtiles.onclick = function(e) {
-        let t = e.target;
-        if (t.classList.contains(`unfilled`)) {
-            console.log(t);
-            target.className = `tile filled-x`;
-
-
-        }
-    }
-
-    */
 
     /*
 
@@ -87,20 +101,17 @@ const tictactoe = function() {
 
     */
 
-    //board.addEventListener('click', )
-
-
-    /*
-    console.log(board);
-    return board;
-    */
+  
     console.log(board, boardtiles);
-    return { board, boardtiles }
+    return { board, boardtiles, user1, comp1}
+
     
+    //Create a function named tileSwitcher
+    //tileSwitcher is a timer that switches between 
 
 }
 
-let {board, boardtiles} = tictactoe();
+let {board, boardtiles, user1, comp1} = tictactoe();
 
 
 
