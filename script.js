@@ -2,10 +2,11 @@
 
 let makeNode = function(xvalue, yvalue) {
     label = [xvalue, yvalue];
+    boardId = `${xvalue},${yvalue}`
     icon = "z";
     connections = [];
 
-    return {xvalue, yvalue, label, icon, connections}
+    return {xvalue, yvalue, label, icon, connections, boardId}
 
 }
 
@@ -63,7 +64,7 @@ const symbolChooser = function() {
     }
 }
 
-//Create a function called turnSwitcher that assigns the cpu to a symbol that you are not using and switches between you and the cpu
+
 
 const tictactoe = function() {
     //Use the symbolChooser function here
@@ -72,6 +73,14 @@ const tictactoe = function() {
     let board = Grid(3,3);
     let boardtiles = document.querySelectorAll('.tile');
 
+    //YOU FORGOT- YOU ALSO HAVE TO CHANGE THE NODE ICONS, NOT JUST THE DOM CLASS
+    //Create a function called turnSwitcher that assigns the cpu to a symbol that you are not using and switches between you and the cpu
+    /*
+    const turnSwitcher = function(boardSquares, classToCheck) {
+        if (boardSquares )
+
+    }
+    */
 
     boardtiles.forEach(tile => {
         tile.addEventListener(`click`, function(e) {
@@ -80,8 +89,22 @@ const tictactoe = function() {
                 console.log(t);
                 if (user1 === `x` || user1 === 'X') {
                     t.className = `tile filled-x`;
+                    //Find the unique id for t, convert it into an array, find the index of the board node that has the same label as the id, and change the icon to either x or o
+                    for (let x = 0; x < board.length; x++) {
+                        if (board[x].boardId === t.id) {
+                            board[x].icon = `x`;
+                            break;
+                        }
+                    }
                 }   else if (user1 === `o` || user1 === 'O') {
-                    t.className = `tile filled-o`
+                    t.className = `tile filled-o`;
+                     //Find the unique id for t, convert it into an array, find the index of the board node that has the same label as the id, and change the icon to either x or o
+                    for (let x = 0; x < board.length; x++) {
+                        if (board[x].boardId === t.id) {
+                            board[x].icon = `o`;
+                            break;
+                        }
+                    }
                 }
                 //t.className = `tile filled-x`;
             }
