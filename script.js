@@ -11,11 +11,8 @@ let makeNode = function(xvalue, yvalue) {
 }
 
 const Grid = function(xmax, ymax) {
-
     let NodeArray = [];
-
     for (let numbery = 0; numbery < ymax; numbery++) {
-
         for (let numberx = 0; numberx < xmax; numberx++) {
 
             newNode = makeNode(numberx, numbery);            
@@ -27,13 +24,9 @@ const Grid = function(xmax, ymax) {
     for (let i = 0; i < NodeArray.length; i++) {
 
         let currentNode = NodeArray[i];
-        
         let cxvalue = currentNode.xvalue;
-
         let cyvalue = currentNode.yvalue;
-        
         let connectionNodes = NodeArray.filter(node => (node.label.toString() !== currentNode.label.toString()) &&  (node.label.toString() === [cxvalue, cyvalue + 1].toString() || node.label.toString() === [cxvalue, cyvalue - 1].toString() || node.label.toString() === [cxvalue + 1, cyvalue].toString() || node.label.toString() === [cxvalue - 1, cyvalue].toString() || node.label.toString() === [cxvalue + 1, cyvalue + 1].toString() || node.label.toString() === [cxvalue - 1, cyvalue - 1].toString() || node.label.toString() === [cxvalue - 1, cyvalue + 1].toString() || node.label.toString() === [cxvalue + 1, cyvalue - 1].toString()));
-        
         currentNode['connections'] = connectionNodes;
 
     }
@@ -73,14 +66,51 @@ const tictactoe = function() {
     let board = Grid(3,3);
     let boardtiles = document.querySelectorAll('.tile');
 
-    //YOU FORGOT- YOU ALSO HAVE TO CHANGE THE NODE ICONS, NOT JUST THE DOM CLASS
-    //Create a function called turnSwitcher that assigns the cpu to a symbol that you are not using and switches between you and the cpu
-    /*
-    const turnSwitcher = function(boardSquares, classToCheck) {
-        if (boardSquares )
+    
+    ///////////////////////////////////////////////////////////////
+
+    let unusedNodes = [];
+    for (let x = 0; x < board.length; x++) {
+        unusedNodes[x] = board[x];
+    }
+
+    
+    
+    let computerTurn = function() {
+
+        //let randomNumber = Math.random(between 0 and unusedNodes.length-1)
+        let randomNumber = Math.floor(Math.random() * unusedNodes.length);
+        console.log(randomNumber);
+
+        let chosenNodeboardId = unusedNodes[randomNumber].boardId
+        console.log(chosenNodeboardId);
+
+        for (let x = 0; x < board.length; x++) {
+
+            if (board[x].boardId === chosenNodeboardId) {
+                board[x].icon = `${comp1}`;
+                
+                for (let y = 0; y < boardtiles.length; y++) {
+
+                    if (boardtiles[y].id === chosenNodeboardId) {
+                        //board[x].icon = `${comp1}`;
+                        boardtiles[y].className = `tile filled-${comp1}`;
+                        unusedNodes.splice( (unusedNodes).indexOf(board[x]), 1 );
+                        break;
+                    }
+                    
+
+                }
+                break;
+            }
+        
+        }
 
     }
-    */
+
+
+
+    ////////////////////////////////////////////////////////////////
 
     boardtiles.forEach(tile => {
         tile.addEventListener(`click`, function(e) {
@@ -89,52 +119,46 @@ const tictactoe = function() {
                 console.log(t);
                 if (user1 === `x` || user1 === 'X') {
                     t.className = `tile filled-x`;
-                    //Find the unique id for t, convert it into an array, find the index of the board node that has the same label as the id, and change the icon to either x or o
+                    //Find the unique id for t, find the index of the board node that has the same boardId as the id, and change the icon to x
                     for (let x = 0; x < board.length; x++) {
                         if (board[x].boardId === t.id) {
                             board[x].icon = `x`;
+                            //everytime a symbol as added via user, remove the node from unusedNodes;
+                            unusedNodes.splice( (unusedNodes).indexOf(board[x]), 1 );
+                            computerTurn();
                             break;
                         }
                     }
                 }   else if (user1 === `o` || user1 === 'O') {
                     t.className = `tile filled-o`;
-                     //Find the unique id for t, convert it into an array, find the index of the board node that has the same label as the id, and change the icon to either x or o
+                     //Find the unique id for t, find the index of the board node that has the same boardId as the id, and change the icon to o
                     for (let x = 0; x < board.length; x++) {
                         if (board[x].boardId === t.id) {
                             board[x].icon = `o`;
+                            //everytime a symbol as added via user, remove the node from unusedNodes;
+                            unusedNodes.splice( (unusedNodes).indexOf(board[x]), 1 );
+                            computerTurn();
                             break;
                         }
                     }
                 }
-                //t.className = `tile filled-x`;
+                
             }
         })
     })
 
-    /*
-
-    let iconchanger = function() {
-        for(tile in tiles) {
-            if (tile.className === `tile unfilled`) {
-                tile.className === `tile filled-x`
-
-            }
-        }
-    }
-
-    */
+   
 
   
     console.log(board, boardtiles);
-    return { board, boardtiles, user1, comp1}
+    return { board, boardtiles, user1, comp1, unusedNodes}
 
     
-    //Create a function named tileSwitcher
-    //tileSwitcher is a timer that switches between 
+    
 
 }
 
-let {board, boardtiles, user1, comp1} = tictactoe();
+let {board, boardtiles, user1, comp1, unusedNodes} = tictactoe();
 
 
 
