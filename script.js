@@ -108,9 +108,24 @@ const tictactoe = function() {
 
     }
 
-
-
     ////////////////////////////////////////////////////////////////
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //DFS Implementation of Finding the Winner of Tic Tac Toe
+
+
+
+    let winChecker = function(node) {
+        
+    }
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     boardtiles.forEach(tile => {
         tile.addEventListener(`click`, function(e) {
@@ -153,8 +168,6 @@ const tictactoe = function() {
     console.log(board, boardtiles);
     return { board, boardtiles, user1, comp1, unusedNodes}
 
-    
-    
 
 }
 
